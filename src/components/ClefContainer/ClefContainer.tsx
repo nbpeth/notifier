@@ -1,32 +1,31 @@
 import React, {ReactElement} from "react";
-import { ReactComponent as TrebleA3 } from "/Users/nicholaspeth/Projects/notifier/src/assets/a3-treble-tiny.svg";
-import { ReactComponent as TrebleA4 } from "/Users/nicholaspeth/Projects/notifier/src/assets/a4-treble-tiny.svg";
-import { ReactComponent as TrebleA5 } from "/Users/nicholaspeth/Projects/notifier/src/assets/a5-treble-tiny.svg";
+import { ReactComponent as TrebleA3 } from "../../assets/a3-treble-tiny.svg";
+import { ReactComponent as TrebleA4 } from "../../assets/a4-treble-tiny.svg";
+import { ReactComponent as TrebleA5 } from "../../assets/a5-treble-tiny.svg";
 
-import { ReactComponent as TrebleB3 } from "/Users/nicholaspeth/Projects/notifier/src/assets/b3-treble-tiny.svg";
-import { ReactComponent as TrebleB4 } from "/Users/nicholaspeth/Projects/notifier/src/assets/b4-treble-tiny.svg";
-import { ReactComponent as TrebleB5 } from "/Users/nicholaspeth/Projects/notifier/src/assets/b5-treble-tiny.svg";
+import { ReactComponent as TrebleB3 } from "../../assets/b3-treble-tiny.svg";
+import { ReactComponent as TrebleB4 } from "../../assets/b4-treble-tiny.svg";
+import { ReactComponent as TrebleB5 } from "../../assets/b5-treble-tiny.svg";
 
-import { ReactComponent as TrebleC3 } from "/Users/nicholaspeth/Projects/notifier/src/assets/c3-treble-tiny.svg";
-import { ReactComponent as TrebleC4 } from "/Users/nicholaspeth/Projects/notifier/src/assets/c4-treble-tiny.svg";
-import { ReactComponent as TrebleC5 } from "/Users/nicholaspeth/Projects/notifier/src/assets/c5-treble-tiny.svg";
+import { ReactComponent as TrebleC3 } from "../../assets/c3-treble-tiny.svg";
+import { ReactComponent as TrebleC4 } from "../../assets/c4-treble-tiny.svg";
+import { ReactComponent as TrebleC5 } from "../../assets/c5-treble-tiny.svg";
 
-import { ReactComponent as TrebleD3 } from "/Users/nicholaspeth/Projects/notifier/src/assets/d3-treble-tiny.svg";
-import { ReactComponent as TrebleD4 } from "/Users/nicholaspeth/Projects/notifier/src/assets/d4-treble-tiny.svg";
-import { ReactComponent as TrebleD5 } from "/Users/nicholaspeth/Projects/notifier/src/assets/d5-treble-tiny.svg";
+import { ReactComponent as TrebleD3 } from "../../assets/d3-treble-tiny.svg";
+import { ReactComponent as TrebleD4 } from "../../assets/d4-treble-tiny.svg";
+import { ReactComponent as TrebleD5 } from "../../assets/d5-treble-tiny.svg";
 
-import { ReactComponent as TrebleE3 } from "/Users/nicholaspeth/Projects/notifier/src/assets/e3-treble-tiny.svg";
-import { ReactComponent as TrebleE4 } from "/Users/nicholaspeth/Projects/notifier/src/assets/e4-treble-tiny.svg";
-import { ReactComponent as TrebleE5 } from "/Users/nicholaspeth/Projects/notifier/src/assets/e5-treble-tiny.svg";
+import { ReactComponent as TrebleE3 } from "../../assets/e3-treble-tiny.svg";
+import { ReactComponent as TrebleE4 } from "../../assets/e4-treble-tiny.svg";
+import { ReactComponent as TrebleE5 } from "../../assets/e5-treble-tiny.svg";
 
-import { ReactComponent as TrebleF3 } from "/Users/nicholaspeth/Projects/notifier/src/assets/f3-treble-tiny.svg";
-import { ReactComponent as TrebleF4 } from "/Users/nicholaspeth/Projects/notifier/src/assets/f4-treble-tiny.svg";
-import { ReactComponent as TrebleF5 } from "/Users/nicholaspeth/Projects/notifier/src/assets/f5-treble-tiny.svg";
+import { ReactComponent as TrebleF3 } from "../../assets/f3-treble-tiny.svg";
+import { ReactComponent as TrebleF4 } from "../../assets/f4-treble-tiny.svg";
+import { ReactComponent as TrebleF5 } from "../../assets/f5-treble-tiny.svg";
 
-import { ReactComponent as TrebleG3 } from "/Users/nicholaspeth/Projects/notifier/src/assets/g3-treble-tiny.svg";
-import { ReactComponent as TrebleG4 } from "/Users/nicholaspeth/Projects/notifier/src/assets/g4-treble-tiny.svg";
-import { ReactComponent as TrebleG5 } from "/Users/nicholaspeth/Projects/notifier/src/assets/g5-treble-tiny.svg";
-import {Card} from "@material-ui/core";
+import { ReactComponent as TrebleG3 } from "../../assets/g3-treble-tiny.svg";
+import { ReactComponent as TrebleG4 } from "../../assets/g4-treble-tiny.svg";
+import { ReactComponent as TrebleG5 } from "../../assets/g5-treble-tiny.svg";
 
 export interface ClefContainerProps {
     visibleNoteId: string
