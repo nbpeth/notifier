@@ -8,14 +8,16 @@ import {
     Button,
     Card,
     Grid,
-    IconButton,
-    LinearProgress, Menu, MenuItem,
-    MuiThemeProvider, Toolbar,
+    LinearProgress,
+    MuiThemeProvider,
+    Toolbar,
     Typography
 } from "@material-ui/core";
 import {darkTheme} from "./styles";
-import {DoneOutline, HighlightOff, Menu as MenuIcon} from "@material-ui/icons";
+import {DoneOutline, HighlightOff} from "@material-ui/icons";
 import {BassClefContainer} from "./components/BassClefContainer/ClefContainer";
+// import {ReactComponent as BassClef} from "./assets/symbols/bass_clef.svg";
+// import {ReactComponent as TrebleClef} from "./assets/symbols/treble_clef.svg";
 
 export type Clef = "treble" | "bass"
 
@@ -84,13 +86,10 @@ const App = () => {
     const [guess, setGuess] = useState<string>("");
     const [recordedGuesses, setRecordedGuesses] = useState<RecordedGuess[]>([]);
     const [clef, setClef] = useState<Clef>("treble");
-    const [anchorEl, setAnchorEl] = useState()
+    const [anchorEl, setAnchorEl] = useState();
 
-
-    const successRate = ((recordedGuesses
-        .map(guess => guess.correct)
-        .reduce((res, next) => next ? res += 1 : res, 0) / recordedGuesses.length) * 100) || 0;
-
+    const [correctSum, setCorrectSum] = useState<number>(0);
+    const successRate = (correctSum / recordedGuesses.length) * 100 || 0
 
     const notes = useMemo( () => {
         switch(clef) {
@@ -116,6 +115,9 @@ const App = () => {
         setGuess(value);
         const goodGuess = thisRandomNote.includes(value);
         setCorrect(goodGuess);
+        if(goodGuess){
+            setCorrectSum(correctSum + 1);
+        }
         setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess, clef}, ...recordedGuesses]);
     }
 
@@ -144,17 +146,19 @@ const App = () => {
             <div className="App">
                 <AppBar position="static" style={{background:"none"}}>
                     <Toolbar>
-                        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={recordButtonPosition}>
-                            <MenuIcon />
-                        </Button>
-                        <Menu
-                            id="simple-menu"
-                            open={!!anchorEl}
-                            anchorEl={anchorEl}
-                        >
-                            <MenuItem disabled={clef === "treble"} onClick={()=>selectClef("treble")}>Treble</MenuItem>
-                            <MenuItem disabled={clef === "bass"} onClick={()=>selectClef("bass")}>Bass</MenuItem>
-                        </Menu>
+
+                        {/*<Button aria-controls="simple-menu" aria-haspopup="true" onClick={recordButtonPosition}>*/}
+                        {/*    <MenuIcon />*/}
+                        {/*</Button>*/}
+                        {/*<Menu*/}
+                        {/*    onBlur={() => setAnchorEl(undefined)}*/}
+                        {/*    id="clef-menu"*/}
+                        {/*    open={!!anchorEl}*/}
+                        {/*    anchorEl={anchorEl}*/}
+                        {/*>*/}
+                        {/*    <MenuItem disabled={clef === "treble"} onClick={()=>selectClef("treble")}>Treble</MenuItem>*/}
+                        {/*    <MenuItem disabled={clef === "bass"} onClick={()=>selectClef("bass")}>Bass</MenuItem>*/}
+                        {/*</Menu>*/}
 
                     </Toolbar>
                 </AppBar>
@@ -194,14 +198,14 @@ const App = () => {
                     <Grid item>
                         <Card style={{ overflowY: "scroll", padding: "15px", height: "100px"}}>
                             {recordedGuesses?.map((recordedGuess: RecordedGuess) => (
-                                <Grid container justify={"center"} key={Math.floor(Math.random() * 1000000)}>
+                                <Grid container justify={"center"} alignItems={'center'} key={new Date().getMilliseconds()}>
                                     <Grid item style={{paddingRight: "15px"}}>
                                         {recordedGuess.clef}
                                     </Grid>
                                     <Grid item style={{paddingRight: "15px"}}>
                                         <Box color={recordedGuess.correct ? "success.main" : "secondary.main"}>
                                             <Typography style={{fontWeight: "bold"}}>
-                                                {recordedGuess.attempt}
+                                                {recordedGuess.attempt.toUpperCase()}
                                             </Typography>
                                         </Box>
                                     </Grid>
@@ -213,7 +217,7 @@ const App = () => {
                                     <Grid item style={{paddingLeft: "15px"}}>
                                         <Box>
                                             <Typography style={{fontWeight: "bold"}}>
-                                                {recordedGuess.expected}
+                                                {recordedGuess.expected.toUpperCase()}
                                             </Typography>
                                         </Box>
                                     </Grid>
