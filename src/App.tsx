@@ -8,13 +8,12 @@ import {
     Button,
     Card,
     Grid,
-    LinearProgress,
-    MuiThemeProvider,
-    Toolbar,
+    LinearProgress, Menu, MenuItem,
+    MuiThemeProvider, Toolbar,
     Typography
 } from "@material-ui/core";
 import {darkTheme} from "./styles";
-import {DoneOutline, HighlightOff} from "@material-ui/icons";
+import {DoneOutline, HighlightOff, Menu as MenuIcon} from "@material-ui/icons";
 import {BassClefContainer} from "./components/BassClefContainer/ClefContainer";
 // import {ReactComponent as BassClef} from "./assets/symbols/bass_clef.svg";
 // import {ReactComponent as TrebleClef} from "./assets/symbols/treble_clef.svg";
