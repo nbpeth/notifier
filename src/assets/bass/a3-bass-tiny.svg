@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" width="31.33mm" height="12.07mm" viewBox="5.6906 -0.0000 11.8868 4.5780">
+<line transform="translate(5.6906, 4.5389)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0781" stroke="currentColor" x1="0.0390" y1="-0.0000" x2="11.8477" y2="-0.0000"/>
+<line transform="translate(5.6906, 3.5389)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0781" stroke="currentColor" x1="0.0390" y1="-0.0000" x2="11.8477" y2="-0.0000"/>
+<line transform="translate(5.6906, 2.5389)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0781" stroke="currentColor" x1="0.0390" y1="-0.0000" x2="11.8477" y2="-0.0000"/>
+<line transform="translate(5.6906, 1.5389)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0781" stroke="currentColor" x1="0.0390" y1="-0.0000" x2="11.8477" y2="-0.0000"/>
+<line transform="translate(5.6906, 0.5389)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0781" stroke="currentColor" x1="0.0390" y1="-0.0000" x2="11.8477" y2="-0.0000"/>
+<path transform="translate(6.4906, 1.5389) scale(0.0040, -0.0040)" d="M556 -125c0 29 23 52 52 52s52 -23 52 -52s-23 -52 -52 -52s-52 23 -52 52zM556 125c0 29 23 52 52 52s52 -23 52 -52s-23 -52 -52 -52s-52 23 -52 52zM233 261c171 0 292 -86 292 -248c0 -263 -264 -415 -517 -521c-2 -2 -5 -3 -8 -3c-6 0 -11 5 -11 11c0 3 1 6 3 8
+c203 118 415 265 415 494c0 121 -64 237 -174 237c-79 0 -138 -57 -164 -133c14 8 28 13 43 13c55 0 100 -45 100 -100c0 -58 -44 -107 -100 -107c-60 0 -112 48 -112 107c0 132 103 242 233 242z" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///var/www/html/notes/cache/notes/984783.ly:1:106:107">
+<path transform="translate(11.4906, 0.5389) scale(0.0040, -0.0040)" d="M215 114c-50 0 -71 -42 -71 -88c0 -79 60 -140 139 -140c50 0 70 42 70 88c0 79 -59 140 -138 140zM497 0c0 -43 -35 -74 -73 -95c-54 -29 -114 -40 -175 -40s-122 11 -176 40c-38 21 -73 52 -73 95s35 74 73 95c54 29 115 40 176 40s121 -11 175 -40
+c38 -21 73 -52 73 -95z" fill="currentColor"/>
+</a>
+</svg>

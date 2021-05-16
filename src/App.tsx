@@ -2,51 +2,109 @@ import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import './App.css';
 import {ClefContainer} from "./components/ClefContainer/ClefContainer";
 import {GuessBox} from "./components/GuessBox/GuessBox";
-import {Box, Button, Card, Grid, LinearProgress, MuiThemeProvider, Typography} from "@material-ui/core";
+import {
+    AppBar,
+    Box,
+    Button,
+    Card,
+    Grid,
+    IconButton,
+    LinearProgress, Menu, MenuItem,
+    MuiThemeProvider, Toolbar,
+    Typography
+} from "@material-ui/core";
 import {darkTheme} from "./styles";
-import {DoneOutline, HighlightOff} from "@material-ui/icons";
+import {DoneOutline, HighlightOff, Menu as MenuIcon} from "@material-ui/icons";
+import {BassClefContainer} from "./components/BassClefContainer/ClefContainer";
+
+export type Clef = "treble" | "bass"
 
 interface RecordedGuess {
     attempt: string;
     expected: string;
     correct: boolean;
+    clef: Clef;
 }
 
+
+const bassNotes = [
+    "a2",
+    "a3",
+    "a4",
+    "b2",
+    "b3",
+    "b4",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "d2",
+    "d3",
+    "d4",
+    "e2",
+    "e3",
+    "e4",
+    "f2",
+    "f3",
+    "f4",
+    "g2",
+    "g3",
+    "g4",
+]
+
+const trebleNotes = [
+    "a3",
+    "b3",
+    "c3",
+    "d3",
+    "e3",
+    "f3",
+    "g3",
+    "a4",
+    "b4",
+    "c4",
+    "d4",
+    "e4",
+    "f4",
+    "g4",
+    "a4",
+    "b4",
+    "c5",
+    "d5",
+    "e5",
+    "f5",
+    "g5",
+]
+
 const App = () => {
-    const notes = useMemo( () => [
-        "a3",
-        "b3",
-        "c3",
-        "d3",
-        "e3",
-        "f3",
-        "g3",
-        "a4",
-        "b4",
-        "c4",
-        "d4",
-        "e4",
-        "f4",
-        "g4",
-        "a4",
-        "b4",
-        "c5",
-        "d5",
-        "e5",
-        "f5",
-        "g5",
-    ], [] )
+
 
     const [notePosition, setNotePosition] = useState<number>(0);
     const [correct, setCorrect] = useState<boolean>(false);
     const [guess, setGuess] = useState<string>("");
     const [recordedGuesses, setRecordedGuesses] = useState<RecordedGuess[]>([]);
+    const [clef, setClef] = useState<Clef>("treble");
+    const [anchorEl, setAnchorEl] = useState()
 
-    const getNoteIndex = useCallback(() => Math.floor(Math.random() * notes.length), [notes]);
 
     const successRate = ((recordedGuesses
         .map(guess => guess.correct)
         .reduce((res, next) => next ? res += 1 : res, 0) / recordedGuesses.length) * 100) || 0;
+
+
+    const notes = useMemo( () => {
+        switch(clef) {
+            case "treble":
+                return trebleNotes;
+            case "bass":
+                return bassNotes;
+            default:
+                return trebleNotes;
+
+        }
+    }, [clef] )
+
+    const getNoteIndex = useCallback(() => Math.floor(Math.random() * notes.length), [notes]);
 
     useEffect(() => {
         setNotePosition(Math.floor(getNoteIndex()));
@@ -58,11 +116,11 @@ const App = () => {
         setGuess(value);
         const goodGuess = thisRandomNote.includes(value);
         setCorrect(goodGuess);
-        setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess}, ...recordedGuesses]);
+        setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess, clef}, ...recordedGuesses]);
     }
 
     const skip = () => {
-        setRecordedGuesses([{attempt: "-", expected: thisRandomNote, correct: false}, ...recordedGuesses]);
+        setRecordedGuesses([{attempt: "-", expected: thisRandomNote, correct: false, clef}, ...recordedGuesses]);
         reset()
     }
 
@@ -71,9 +129,35 @@ const App = () => {
         setNotePosition(getNoteIndex());
     }
 
+    const recordButtonPosition = (event: any) => {
+        setAnchorEl(event.currentTarget);
+    }
+
+    const selectClef = (value: Clef) => {
+        setClef(value)
+        setAnchorEl(undefined);
+        reset();
+    }
+
     return (
         <MuiThemeProvider theme={darkTheme}>
             <div className="App">
+                <AppBar position="static" style={{background:"none"}}>
+                    <Toolbar>
+                        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={recordButtonPosition}>
+                            <MenuIcon />
+                        </Button>
+                        <Menu
+                            id="simple-menu"
+                            open={!!anchorEl}
+                            anchorEl={anchorEl}
+                        >
+                            <MenuItem disabled={clef === "treble"} onClick={()=>selectClef("treble")}>Treble</MenuItem>
+                            <MenuItem disabled={clef === "bass"} onClick={()=>selectClef("bass")}>Bass</MenuItem>
+                        </Menu>
+
+                    </Toolbar>
+                </AppBar>
                 <LinearProgress color={successRate > 50 ? "primary" : "secondary"} style={{height:"15px"}} variant={"determinate"} value={successRate} />
                 <Grid container direction={"column"} alignContent={"center"} justify={"center"} spacing={2}>
                     <Grid item>
@@ -82,10 +166,14 @@ const App = () => {
                                 <GuessBox disabled={!!guess} onClick={onGuess}/>
                             </Grid>
                             <Grid item style={{padding: "15px"}}>
-                                <ClefContainer visibleNoteId={thisRandomNote}/>
+                                { clef === "treble" &&
+                                    <ClefContainer visibleNoteId={thisRandomNote}/>
+                                }
+                                { clef === "bass" &&
+                                    <BassClefContainer visibleNoteId={thisRandomNote}/>
+                                }
                             </Grid>
                             <Grid item style={{padding: "15px"}}>
-
                                 {guess && (correct ? <Box color={"success.main"}><DoneOutline /></Box> : <Box color={"secondary.main"}><HighlightOff /></Box>)}
                             </Grid>
                         </Card>
@@ -107,6 +195,9 @@ const App = () => {
                         <Card style={{ overflowY: "scroll", padding: "15px", height: "100px"}}>
                             {recordedGuesses?.map((recordedGuess: RecordedGuess) => (
                                 <Grid container justify={"center"} key={Math.floor(Math.random() * 1000000)}>
+                                    <Grid item style={{paddingRight: "15px"}}>
+                                        {recordedGuess.clef}
+                                    </Grid>
                                     <Grid item style={{paddingRight: "15px"}}>
                                         <Box color={recordedGuess.correct ? "success.main" : "secondary.main"}>
                                             <Typography style={{fontWeight: "bold"}}>
