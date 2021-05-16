@@ -146,20 +146,18 @@ const App = () => {
             <div className="App">
                 <AppBar position="static" style={{background:"none"}}>
                     <Toolbar>
-
-                        {/*<Button aria-controls="simple-menu" aria-haspopup="true" onClick={recordButtonPosition}>*/}
-                        {/*    <MenuIcon />*/}
-                        {/*</Button>*/}
-                        {/*<Menu*/}
-                        {/*    onBlur={() => setAnchorEl(undefined)}*/}
-                        {/*    id="clef-menu"*/}
-                        {/*    open={!!anchorEl}*/}
-                        {/*    anchorEl={anchorEl}*/}
-                        {/*>*/}
-                        {/*    <MenuItem disabled={clef === "treble"} onClick={()=>selectClef("treble")}>Treble</MenuItem>*/}
-                        {/*    <MenuItem disabled={clef === "bass"} onClick={()=>selectClef("bass")}>Bass</MenuItem>*/}
-                        {/*</Menu>*/}
-
+                        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={recordButtonPosition}>
+                            <MenuIcon />
+                        </Button>
+                        <Menu
+                            onBlur={() => setAnchorEl(undefined)}
+                            id="clef-menu"
+                            open={!!anchorEl}
+                            anchorEl={anchorEl}
+                        >
+                            <MenuItem disabled={clef === "treble"} onClick={()=>selectClef("treble")}>Treble</MenuItem>
+                            <MenuItem disabled={clef === "bass"} onClick={()=>selectClef("bass")}>Bass</MenuItem>
+                        </Menu>
                     </Toolbar>
                 </AppBar>
                 <LinearProgress color={successRate > 50 ? "primary" : "secondary"} style={{height:"15px"}} variant={"determinate"} value={successRate} />
