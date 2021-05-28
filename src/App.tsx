@@ -13,13 +13,13 @@ import {
     Typography
 } from "@material-ui/core";
 import {darkTheme} from "./styles";
-import {DoneOutline, HighlightOff, Menu as MenuIcon} from "@material-ui/icons";
+import {Menu as MenuIcon} from "@material-ui/icons";
 import {BassClefContainer} from "./components/BassClefContainer/ClefContainer";
 // import {ReactComponent as BassClef} from "./assets/symbols/bass_clef.svg";
 // import {ReactComponent as TrebleClef} from "./assets/symbols/treble_clef.svg";
 
 export type Clef = "treble" | "bass"
-
+export const SKIP_VALUE="-";
 interface RecordedGuess {
     attempt: string;
     expected: string;
@@ -88,8 +88,6 @@ const App = () => {
     const [clef, setClef] = useState<Clef>("treble");
     const [anchorEl, setAnchorEl] = useState();
 
-    console.log("recordedGuess", recordedGuesses.reverse())
-
     const [correctSum, setCorrectSum] = useState<number>(0);
     const successRate = (correctSum / recordedGuesses.length) * 100 || 0
 
@@ -117,14 +115,15 @@ const App = () => {
         setGuess(value);
         const goodGuess = thisRandomNote.includes(value);
         setCorrect(goodGuess);
-        if(goodGuess){
+
+        if(goodGuess && value !== SKIP_VALUE){
             setCorrectSum(correctSum + 1);
         }
         setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess, clef, id: new Date().getTime()}, ...recordedGuesses]);
     }
 
     const skip = () => {
-        setRecordedGuesses([{attempt: "-", expected: thisRandomNote, correct: false, clef, id: new Date().getMilliseconds()}, ...recordedGuesses]);
+        setRecordedGuesses([{attempt: SKIP_VALUE, expected: thisRandomNote, correct: false, clef, id: new Date().getTime()}, ...recordedGuesses]);
         reset()
     }
 
@@ -178,7 +177,15 @@ const App = () => {
                                 }
                             </Grid>
                             <Grid item style={{padding: "15px"}}>
-                                {guess && (correct ? <Box color={"success.main"}><DoneOutline /></Box> : <Box color={"secondary.main"}><HighlightOff /></Box>)}
+                                {
+                                    guess && (
+                                        <Box color={correct ? "success.main" : "secondary.main"}>
+                                            <h1>
+                                                {thisRandomNote?.toUpperCase()}
+                                            </h1>
+                                        </Box>
+                                    )
+                                }
                             </Grid>
                         </Card>
                     </Grid>
@@ -187,7 +194,7 @@ const App = () => {
                         <Card style={{padding: "15px"}}>
                             <Grid container justify={"space-between"}>
                                 <Grid item>
-                                    <Button color={"secondary"} variant={"contained"} onClick={skip}>Skip</Button>
+                                    <Button color={"secondary"} variant={"contained"} disabled={!!guess} onClick={skip}>Skip</Button>
                                 </Grid>
                                 <Grid item>
                                     <Button color={"primary"} variant={"contained"} disabled={!guess} onClick={reset}>Next</Button>
@@ -211,7 +218,7 @@ const App = () => {
                                     </Grid>
 
                                     <Grid item>
-                                        -
+                                        :
                                     </Grid>
 
                                     <Grid item style={{paddingLeft: "15px"}}>
