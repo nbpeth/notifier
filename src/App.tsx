@@ -25,6 +25,7 @@ interface RecordedGuess {
     expected: string;
     correct: boolean;
     clef: Clef;
+    id: number;
 }
 
 
@@ -87,6 +88,8 @@ const App = () => {
     const [clef, setClef] = useState<Clef>("treble");
     const [anchorEl, setAnchorEl] = useState();
 
+    console.log("recordedGuess", recordedGuesses.reverse())
+
     const [correctSum, setCorrectSum] = useState<number>(0);
     const successRate = (correctSum / recordedGuesses.length) * 100 || 0
 
@@ -117,11 +120,11 @@ const App = () => {
         if(goodGuess){
             setCorrectSum(correctSum + 1);
         }
-        setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess, clef}, ...recordedGuesses]);
+        setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess, clef, id: new Date().getMilliseconds()}, ...recordedGuesses]);
     }
 
     const skip = () => {
-        setRecordedGuesses([{attempt: "-", expected: thisRandomNote, correct: false, clef}, ...recordedGuesses]);
+        setRecordedGuesses([{attempt: "-", expected: thisRandomNote, correct: false, clef, id: new Date().getMilliseconds()}, ...recordedGuesses]);
         reset()
     }
 
@@ -195,7 +198,7 @@ const App = () => {
                     <Grid item>
                         <Card style={{ overflowY: "scroll", padding: "15px", height: "100px"}}>
                             {recordedGuesses?.map((recordedGuess: RecordedGuess) => (
-                                <Grid container justify={"center"} alignItems={'center'} key={new Date().getMilliseconds()}>
+                                <Grid container justify={"center"} alignItems={'center'} key={recordedGuess.id}>
                                     <Grid item style={{paddingRight: "15px"}}>
                                         {recordedGuess.clef}
                                     </Grid>
