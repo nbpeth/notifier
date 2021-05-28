@@ -120,7 +120,7 @@ const App = () => {
         if(goodGuess){
             setCorrectSum(correctSum + 1);
         }
-        setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess, clef, id: new Date().getMilliseconds()}, ...recordedGuesses]);
+        setRecordedGuesses([{attempt: value, expected: thisRandomNote, correct: goodGuess, clef, id: new Date().getTime()}, ...recordedGuesses]);
     }
 
     const skip = () => {
